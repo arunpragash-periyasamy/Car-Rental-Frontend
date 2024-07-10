@@ -1,0 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+ .triangle {
+  width: 0;
+  height: 0;
+  border-bottom: 3rem solid pink;
+  border-right: 3rem solid transparent; 
+}
