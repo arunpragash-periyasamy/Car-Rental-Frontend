@@ -9,7 +9,7 @@ const Header = () => {
     setCollapse(!collapse);
   };
   return (
-    <div className="min-w-full min-h-16 flex px-2 md:px-8">
+    <div className="min-w-full min-h-16 flex px-2 md:px-8 bg-white">
       <div className="md:hidden py-3 min-w-full flex items-center">
         <div className="flex-shrink-0" onClick={toggleCollapse}>
           <BiMenuAltLeft className="text-yellow-500" />

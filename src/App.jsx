@@ -1,16 +1,12 @@
 
 import './App.css'
-import Banner from './components/Banner/Banner'
-import Filter from './components/Filter/Filter'
-import Header from './components/Header/Header'
+import {Outlet} from 'react-router-dom'
 
 function App() {
   
 
-  return (<div className='realtive'>
-    <Header />
-    <Banner />
-    <Filter/>
+  return (<div className='bg-gray-200 min-h-screen'>
+    <Outlet />
   </div>
   )
 }
