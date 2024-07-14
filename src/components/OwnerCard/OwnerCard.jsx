@@ -52,7 +52,7 @@ const OwnerCard = () => {
               </div>
               
               <div>
-                  <button className="w-full bg-black text-white text-xs font-bold p-1 rounded">Message to Owner</button>
+                  <button className="w-full bg-black text-white text-xs font-bold p-1 rounded hover:bg-white hover:text-black transition-all ease-in-out border-solid border-[1px] hover:border-black">Message to Owner</button>
               </div>
       </div>
     </div>
