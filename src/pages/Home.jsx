@@ -16,7 +16,7 @@ const Home = () => {
         <Header />
         <Banner />
         <Filter />
-        <div className="flex flex-wrap justify-center md:pt-7 bg-slate-100">
+        <div className="flex flex-wrap justify-center md:pt-10  bg-slate-100">
           {callMethod()}
         </div>
       </div>

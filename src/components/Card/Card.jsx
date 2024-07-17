@@ -82,7 +82,7 @@ import { PiSeatBold } from "react-icons/pi";
 
 const Card = () => {
   return (
-    <div className="max-w-56 bg-white p-2 rounded m-5">
+    <div className="max-w-80 bg-white p-2 rounded m-5">
       <div className="rounded">
         <img
           className="rounded"

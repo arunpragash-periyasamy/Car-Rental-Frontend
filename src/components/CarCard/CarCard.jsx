@@ -8,24 +8,6 @@ import ExtraService from "../ExtraService/ExtraService";
 import Description from "../Description/Description";
 
 const CarCard = () => {
-  const cars = [
-    {
-      id: 1,
-      src: "https://dreamsrent.dreamstechnologies.com/html/assets/img/cars/slider-03.jpg",
-    }, // Replace with your image paths
-    {
-      id: 2,
-      src: "https://dreamsrent.dreamstechnologies.com/html/assets/img/cars/slider-thum-04.jpg",
-    },
-    {
-      id: 3,
-      src: "https://dreamsrent.dreamstechnologies.com/html/assets/img/cars/slider-thum-03.jpg",
-    },
-    {
-      id: 4,
-      src: "https://dreamsrent.dreamstechnologies.com/html/assets/img/cars/slider-thum-05.jpg",
-    },
-  ];
 
   return (
     <div className="flex justify-center gap-4 lg:gap-20 flex-wrap lg:mx-auto my-5">
