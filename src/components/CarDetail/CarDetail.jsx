@@ -2,8 +2,8 @@ import { Divider } from "antd";
 
 const CarDetail = () => {
   return (
-    <div className="max-w-80 bg-white p-2 rounded">
-      <div>Car Details</div>
+    <div className="min-w-48 lg:max-w-80 bg-white p-2 rounded">
+      <div className="font-bold text-sm">Car Details</div>
       <Divider />
       <div className="flex gap-4 items-center">
         <img

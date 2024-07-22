@@ -3,7 +3,15 @@ import Logo from "/logo.svg";
 import SmallLogo from "/logo-small.png";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
+import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { clearUser } from "../../utils/slices/userSlice";
 const Header = () => {
+  const token = useSelector(store => store.user.token)
+  const dispatch = useDispatch();
+  const logout = () => {
+    dispatch(clearUser());
+  }
   const [collapse, setCollapse] = useState(false);
   const toggleCollapse = () => {
     setCollapse(!collapse);
@@ -24,14 +32,39 @@ const Header = () => {
           <img src={Logo} alt="Logo" />
         </div>
         <div className="hidden md:flex items-center gap-4">
-          <div>Home</div>
-          <div>Contact</div>
-          <div>About Us</div>
+          <div>
+            <Link to="/">Home</Link>
+          </div>
+          <div>
+            <Link to="/add-car">Add Car</Link>
+          </div>
+          <div>
+            <Link to="/">View Car</Link>
+          </div>
+          <div>
+            <Link to="/my-bookings">My Bookings</Link>
+          </div>
         </div>
-        <div className="hidden sm:flex gap-3">
-          <button>Sign in</button>
-          <button>Login in</button>
-        </div>
+        {token ? (
+          <div className="hidden sm:flex gap-3">
+              <button className="bg-orange-400 text-white p-2 rounded font-bold hover:bg-white hover:text-orange-400 border hover:border-orange-500" onClick={logout}>
+                Logout
+              </button>
+          </div>
+        ) : (
+          <div className="hidden sm:flex gap-3">
+            <Link to="/register">
+              <button className="bg-black text-white p-2 font-bold border hover:bg-white hover:text-black hover:border-black rounded">
+                Sign Up
+              </button>
+            </Link>
+            <Link to="/login">
+              <button className="bg-orange-400 text-white p-2 rounded font-bold hover:bg-white hover:text-orange-400 border hover:border-orange-500">
+                Sign In
+              </button>
+            </Link>
+          </div>
+        )}
       </div>
     </div>
   );

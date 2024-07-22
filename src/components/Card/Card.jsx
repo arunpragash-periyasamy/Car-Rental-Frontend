@@ -6,7 +6,10 @@ import { GiGearStickPattern } from "react-icons/gi";
 import { IoMdSpeedometer } from "react-icons/io";
 import { MdLocationPin, MdOutlineSevereCold } from "react-icons/md";
 import { PiSeatBold } from "react-icons/pi";
-
+import { firstCaps } from "../../utils/Utility";
+import { BACKEND_URL } from "../../utils/constants.";
+import CarImage from "/car-right.png";
+import { Link } from "react-router-dom";
 // const Card = () => {
 //   return (
 //     <div className="max-w-sm rounded overflow-hidden shadow-lg">
@@ -80,55 +83,62 @@ import { PiSeatBold } from "react-icons/pi";
 
 // export default Card;
 
-const Card = () => {
+const Card = ({car}) => {
   return (
-    <div className="max-w-80 bg-white p-2 rounded m-5">
-      <div className="rounded">
-        <img
-          className="rounded"
-          src="https://dreamsrent.dreamstechnologies.com/html/assets/img/cars/car-02.jpg"
-          alt=""
-        />
-      </div>
-      <div>Kia Soul 2016</div>
-      <div className="flex text-xs text-orange-400 justify-between">
-        <div className="flex">
-          <div className="flex mr-1">
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
+    <Link to={`car/${car.id}`}>
+      <div className="max-w-80 bg-white p-2 rounded m-5">
+        <div className="rounded">
+          <img
+            className="rounded w-72 h-44"
+            src={
+              car.images.length > 0
+                ? `${BACKEND_URL}/api/cars/images/${car.images[0]}`
+                : CarImage
+            }
+            alt=""
+          />
+        </div>
+        <div>{car.carName}</div>
+        <div className="flex text-xs text-orange-400 justify-between">
+          <div className="flex">
+            <div className="flex mr-1">
+              <FaStar />
+              <FaStar />
+              <FaStar />
+              <FaStar />
+              <FaStar />
+            </div>
+            <div>(5.0)</div>
           </div>
-          <div>(5.0)</div>
+          <div className="text-white text-[0.5rem] bg-teal-400 rounded px-1 flex items-center">
+            <MdLocationPin />
+            4.0km
+          </div>
         </div>
-        <div className="text-white text-[0.5rem] bg-teal-400 rounded px-1 flex items-center">
-          <MdLocationPin />
-          4.0km
+        <Divider />
+        <div className="grid text-xs text-slate-500 grid-cols-3 gap-1">
+          <div className="flex items-center gap-1">
+            <GiGearStickPattern />{" "}
+            {car.gearType === "automatic" ? "Auto" : "Manual"}
+          </div>
+          <div className="flex items-center  gap-1">
+            <IoMdSpeedometer /> {car.mileage} Km
+          </div>
+          <div className="flex items-center  gap-1">
+            <BsFillFuelPumpFill /> {firstCaps(car.fuelType)}
+          </div>
+          <div className="flex items-center  gap-1">
+            <MdOutlineSevereCold /> AC
+          </div>
+          <div className="flex items-center  gap-1">
+            <FaCalendarAlt /> {car.year}
+          </div>
+          <div className="flex items-center  gap-1">
+            <PiSeatBold /> {car.seats} Person
+          </div>
         </div>
       </div>
-      <Divider />
-      <div className="grid text-xs text-slate-500 grid-cols-3 gap-1">
-        <div className="flex items-center gap-1">
-          <GiGearStickPattern /> Auto
-        </div>
-        <div className="flex items-center  gap-1">
-          <IoMdSpeedometer /> 22 Km
-        </div>
-        <div className="flex items-center  gap-1">
-          <BsFillFuelPumpFill /> Diesel
-        </div>
-        <div className="flex items-center  gap-1">
-          <MdOutlineSevereCold /> AC
-        </div>
-        <div className="flex items-center  gap-1">
-          <FaCalendarAlt /> 2016
-        </div>
-        <div className="flex items-center  gap-1">
-          <PiSeatBold /> 5 Person
-        </div>
-      </div>
-    </div>
+    </Link>
   );
 };
 

@@ -3,7 +3,7 @@ import { FaLocationDot } from "react-icons/fa6";
 
 const BookingType = () => {
   return (
-    <div className="bg-white min-w-[42rem] p-6 rounded my-4">
+    <div className="bg-white md:min-w-[42rem] p-6 rounded my-4">
       <div className="flex gap-3 items-center">
         <div className="bg-orange-500 text-white text-sm p-1 rounded">
           <FaLocationDot />
@@ -14,7 +14,7 @@ const BookingType = () => {
       <div className="">
         <div>
           <Form.Item name="book" className="mb-0">
-            <Radio.Group className="grid grid-cols-4 gap-5">
+            <Radio.Group className="grid grid-cols-1 lg:grid-cols-4 gap-5">
               <div>
                 <Radio
                   value="hourly"
@@ -51,7 +51,7 @@ const BookingType = () => {
           </Form.Item>
         </div>
 
-        <div className="grid grid-cols-2 my-4">
+        <div className="grid md:grid-cols-2 my-4">
           <div className="flex flex-col gap-1">
             <p className="font-bold text-[0.6rem]">Start Date</p>
             <Form.Item className="mb-0 mr-6">
@@ -65,7 +65,7 @@ const BookingType = () => {
             </Form.Item>
           </div>
         </div>
-        <div className="grid grid-cols-2 my-4">
+        <div className="grid md:grid-cols-2 my-4">
           <div className="flex flex-col gap-1">
             <p className="font-bold text-[0.6rem]">Return Date</p>
             <Form.Item className="mb-0 mr-6" name="returnDate">

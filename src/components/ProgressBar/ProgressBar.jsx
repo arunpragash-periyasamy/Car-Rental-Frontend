@@ -4,7 +4,7 @@ import { MdOutlineNoteAlt } from "react-icons/md";
 
 const ProgressBar = () => {
   return (
-    <div className="m-auto min-w-96   py-4 px-8 rounded my-10 space-y-2 flex flex-col md:flex-row items-center md:justify-between  min-h-10 bg-white">
+    <div className="m-auto md:min-w-96  py-4 md:px-8 rounded my-10 space-y-2 flex flex-col md:flex-row items-center md:justify-between  min-h-10 bg-white">
       <div>
         <div className="font-bold">Reserve Your Car</div>
         <div className="text-[0.5rem] text-slate-500">
