@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   token: localStorage.getItem("token"),
-  username: localStorage.getItem("username"),
+  userName: localStorage.getItem("userName"),
+  userType: localStorage.getItem("userType")
 };
 
 const userSlice = createSlice({
@@ -11,15 +12,16 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.token = action.payload.token;
-      state.username = action.payload.username;
+      state.userName = action.payload.userName;
+      state.userType = action.payload.userType;
       localStorage.setItem("token", action.payload.token);
-      localStorage.setItem("username", action.payload.username);
+      localStorage.setItem("userName", action.payload.userName);
+      localStorage.setItem("userType", action.payload.userType);
     },
     clearUser: (state) => {
       state.token = null;
-      state.username = null;
-      localStorage.removeItem("token");
-      localStorage.removeItem("username");
+      state.userName = null;
+      localStorage.clear();
     },
   },
 });

@@ -3,14 +3,16 @@ import Logo from "/logo.svg";
 import SmallLogo from "/logo-small.png";
 import { useState } from "react";
 import Sidebar from "../Sidebar/Sidebar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { clearUser } from "../../utils/slices/userSlice";
 const Header = () => {
-  const token = useSelector(store => store.user.token)
+  const userType = useSelector(store => store.user.userType)
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const logout = () => {
     dispatch(clearUser());
+    navigate("/login");
   }
   const [collapse, setCollapse] = useState(false);
   const toggleCollapse = () => {
@@ -35,17 +37,23 @@ const Header = () => {
           <div>
             <Link to="/">Home</Link>
           </div>
+          {userType === "lessor" && (<>
           <div>
             <Link to="/add-car">Add Car</Link>
           </div>
           <div>
-            <Link to="/">View Car</Link>
+            <Link to="/view-cars">View Car</Link>
           </div>
+          </>
+          )}
+          {userType === "user" && (<>
           <div>
             <Link to="/my-bookings">My Bookings</Link>
           </div>
+          </>
+          )}
         </div>
-        {token ? (
+        {userType ? (
           <div className="hidden sm:flex gap-3">
               <button className="bg-orange-400 text-white p-2 rounded font-bold hover:bg-white hover:text-orange-400 border hover:border-orange-500" onClick={logout}>
                 Logout

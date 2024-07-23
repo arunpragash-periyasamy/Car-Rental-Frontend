@@ -13,7 +13,6 @@ function App() {
     try {
       if (token !== null || token !== undefined) {
         const response = await axiosInstance.post("/users/expired");
-        console.log(response)
         if (response.status !== 200) {
           throw 403
         }

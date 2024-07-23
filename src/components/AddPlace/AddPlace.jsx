@@ -1,33 +1,39 @@
 import { Divider, Form, Input } from "antd";
-import { extractNumbers } from "../../utils/Utility";
-const PriceInfo = ({form}) => {
+import { extractNumbers, firstCaps } from "../../utils/Utility";
+
+const AddPlace = ({ form }) => {
   const handleNumber = (e) => {
     const { id, value } = e.target;
     const transformedValue = extractNumbers(value);
     form.setFieldsValue({ [id]: transformedValue });
   };
+
+  const handleCaps = (e) => {
+    const { id, value } = e.target;
+    const transformedValue = firstCaps(value);
+    form.setFieldsValue({ [id]: transformedValue });
+  };
   return (
     <div className="bg-white p-6">
-      <div className="text-sm font-bold">Price Info</div>
+      <div className="text-sm font-bold">Add Place</div>
       <Divider />
       <div className="text-[0.6rem] grid md:grid-cols-2 lg:grid-cols-3">
         <div>
           <div className="font-bold ">
-            Amount (Per Hour){" "}
+            Address
             <span className="text-red-500 required-asterisk"> *</span>
           </div>
           <Form.Item
-            name={"amount"}
+            name={"address"}
             className="w-11/12"
             rules={[
               {
                 required: true,
-                message: "Please enter an amount",
+                message: "Please select a address",
               },
             ]}
           >
             <Input
-              onChange={handleNumber}
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
             />
@@ -35,16 +41,20 @@ const PriceInfo = ({form}) => {
         </div>
         <div>
           <div className="font-bold ">
-            Door Delivery & Pickup Charge{" "}
+            Pin code
             <span className="text-red-500 required-asterisk"> *</span>
           </div>
           <Form.Item
-            name={"doorDeliveryPrice"}
+            name={"pinCode"}
             className="w-11/12"
             rules={[
               {
                 required: true,
-                message: "Please enter a delivery fee",
+                message: "Please select a pinCode",
+              },
+              {
+                pattern: /^.{6}$/,
+                message: "Input must be exactly 6 number long!",
               },
             ]}
           >
@@ -52,26 +62,27 @@ const PriceInfo = ({form}) => {
               onChange={handleNumber}
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
+              maxLength={6}
             />
           </Form.Item>
         </div>
         <div>
           <div className="font-bold ">
-            Trip Protection Fee{" "}
+            City
             <span className="text-red-500 required-asterisk"> *</span>
           </div>
           <Form.Item
-            name={"tripProtectionFee"}
+            name={"city"}
             className="w-11/12"
             rules={[
               {
                 required: true,
-                message: "Please enter a trip protection Fee",
+                message: "Please select a city",
               },
             ]}
           >
             <Input
-              onChange={handleNumber}
+              onChange={handleCaps}
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
             />
@@ -80,20 +91,20 @@ const PriceInfo = ({form}) => {
 
         <div>
           <div className="font-bold ">
-            Tax <span className="text-red-500 required-asterisk"> *</span>
+            State <span className="text-red-500 required-asterisk"> *</span>
           </div>
           <Form.Item
-            onChange={handleNumber}
-            name={"tax"}
+            name={"state"}
             className="w-11/12"
             rules={[
               {
                 required: true,
-                message: "Please enter a tax",
+                message: "Please select a state",
               },
             ]}
           >
             <Input
+              onChange={handleCaps}
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
             />
@@ -102,43 +113,21 @@ const PriceInfo = ({form}) => {
 
         <div>
           <div className="font-bold ">
-            Convienence Fee{" "}
+            Country
             <span className="text-red-500 required-asterisk"> *</span>
           </div>
           <Form.Item
-            onChange={handleNumber}
-            name={"convienenceFee"}
+            name={"country"}
             className="w-11/12"
             rules={[
               {
                 required: true,
-                message: "Please enter a convienence fee",
+                message: "Please select a country",
               },
             ]}
           >
             <Input
-              className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
-          "
-            />
-          </Form.Item>
-        </div>
-        <div>
-          <div className="font-bold ">
-            Refundable Deposit{" "}
-            <span className="text-red-500 required-asterisk"> *</span>
-          </div>
-          <Form.Item
-            onChange={handleNumber}
-            name={"refundableDeposit"}
-            className="w-11/12"
-            rules={[
-              {
-                required: true,
-                message: "Please enter a refundable deposit",
-              },
-            ]}
-          >
-            <Input
+              onChange={handleCaps}
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
             />
@@ -149,4 +138,4 @@ const PriceInfo = ({form}) => {
   );
 };
 
-export default PriceInfo;
+export default AddPlace;

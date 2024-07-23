@@ -10,6 +10,8 @@ import AddCarForm from "../components/Testing/Testing";
 import Login from "../pages/Login"; // Assuming you have a Login component
 import Register from "../pages/Register"; // Assuming you have a Register component
 import ProtectedRoute from "./ProtectedRoute";
+import MyBooking from "../pages/MyBooking";
+import ViewCar from "../pages/ViewCar";
 
 const router = createBrowserRouter([
   {
@@ -29,10 +31,6 @@ const router = createBrowserRouter([
         element: <ProtectedRoute element={Billing} />,
       },
       {
-        path: "/card",
-        element: <ProtectedRoute element={Card} />,
-      },
-      {
         path: "/checkout",
         element: <ProtectedRoute element={Checkout} />,
       },
@@ -45,8 +43,20 @@ const router = createBrowserRouter([
         element: <ProtectedRoute element={AddCar} />,
       },
       {
+        path: "/view-cars",
+        element: <ProtectedRoute element={ViewCar} />,
+      },
+      {
+        path: "/add-car/:id",
+        element: <ProtectedRoute element={AddCar} />,
+      },
+      {
         path: "/login",
         element: <Login />,
+      },
+      {
+        path: "/my-booking",
+        element: <MyBooking />,
       },
       {
         path: "/register",

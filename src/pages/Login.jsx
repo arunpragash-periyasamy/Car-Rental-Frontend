@@ -55,7 +55,7 @@ const Login = () => {
               <span className="text-red-500 required-asterisk"> *</span>
             </p>
             <Form.Item name="password">
-              <Input className="bg-gray-50 p-2 hover:border-orange-500 focus:border-orange-500" />
+              <Input type="password" className="bg-gray-50 p-2 hover:border-orange-500 focus:border-orange-500" />
             </Form.Item>
           </div>
           <div className="mt-3">

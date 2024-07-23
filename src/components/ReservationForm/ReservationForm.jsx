@@ -1,20 +1,36 @@
-import React from "react";
-import {
-  Form,
-  Input,
-  DatePicker,
-  TimePicker,
-  Button,
-  Radio,
-  Divider,
-  Checkbox,
-} from "antd";
+import React, { useState } from "react";
+import { Form, Input, DatePicker, TimePicker, Checkbox, message } from "antd";
+import { useDispatch } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
+import { setCarId, setLocationForm } from "../../utils/slices/formDataSlice";
+import moment from "moment";
+import { dateToString, disabledDate, validateAndAdjustTimes } from "../../utils/Utility";
 
 const ReservationForm = () => {
   const [form] = Form.useForm();
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const [sameLocation, setSameLocation] = useState(false);
+  const navigate = useNavigate();
+
+  const handleSameLocation = () => {
+    if (!sameLocation) {
+      console.log(form.getFieldValue("sameLocation"));
+      form.setFieldsValue({
+        returnLocation: form.getFieldValue("deliveryLocation"),
+      });
+      console.log("Value changed");
+    }
+    setSameLocation(!sameLocation);
+  };
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+    if (validateAndAdjustTimes(form)) {
+      console.log(values);
+      dispatch(setLocationForm(values));
+      dispatch(setCarId(id));
+      navigate("/checkout");
+    }
   };
 
   return (
@@ -50,8 +66,11 @@ const ReservationForm = () => {
             </div>
           </div>
           <div className="my-1">
-            <Form.Item name="sameLocation" className="flex items-center">
-              <Checkbox className="bg-slate-50 max-w-1 mr-2" />{" "}
+            <Form.Item className="flex items-center">
+              <Checkbox
+                className="bg-slate-50 max-w-1 mr-2"
+                onChange={handleSameLocation}
+              />{" "}
               <span className="ml-2">Return to the same location</span>{" "}
             </Form.Item>
           </div>
@@ -76,7 +95,7 @@ const ReservationForm = () => {
           </div>
           <div className="space-y-1 my-1">
             <p className="font-bold">Pickup Date</p>
-            <div className="flex gap-5">
+            <div className="">
               <Form.Item
                 name="pickupDate"
                 rules={[
@@ -86,24 +105,13 @@ const ReservationForm = () => {
                   },
                 ]}
               >
-                <DatePicker className=" hover:border-orange-400 focus:border-orange-400" />
-              </Form.Item>
-              <Form.Item
-                name="pickupTime"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input the delivery location!",
-                  },
-                ]}
-              >
-                <TimePicker className=" hover:border-orange-400 focus:border-orange-400" />
+                <DatePicker disabledDate={disabledDate} showTime className="w-full hover:border-orange-400 focus:border-orange-400" />
               </Form.Item>
             </div>
           </div>
           <div className="space-y-1 my-1">
             <p className="font-bold">Return Date</p>
-            <div className="flex gap-5">
+            <div className="">
               <Form.Item
                 name="returnDate"
                 rules={[
@@ -113,18 +121,7 @@ const ReservationForm = () => {
                   },
                 ]}
               >
-                <DatePicker className=" hover:border-orange-400 focus:border-orange-400" />
-              </Form.Item>
-              <Form.Item
-                name="returnTime"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input the delivery location!",
-                  },
-                ]}
-              >
-                <TimePicker className=" hover:border-orange-400 focus:border-orange-400" />
+                <DatePicker className="w-full hover:border-orange-400 focus:border-orange-400" showTime disabledDate={disabledDate}/>
               </Form.Item>
             </div>
             <div className="w-full">

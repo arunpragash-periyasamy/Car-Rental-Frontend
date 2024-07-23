@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Image, Upload } from "antd";
+
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -8,6 +9,7 @@ const getBase64 = (file) =>
     reader.onload = () => resolve(reader.result);
     reader.onerror = (error) => reject(error);
   });
+
 const UploadImage = ({ size, onChange }) => {
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -19,7 +21,12 @@ const UploadImage = ({ size, onChange }) => {
     setPreviewImage(file.url || file.preview);
     setPreviewOpen(true);
   };
-  const handleChange = ({ fileList: newFileList }) => { setFileList(newFileList);  onChange(newFileList); };
+
+  const handleCaps = ({ fileList: newFileList }) => {
+    setFileList(newFileList);
+    onChange(newFileList); // Check if onChange is provided
+  };
+
   const uploadButton = (
     <button
       style={{
@@ -38,14 +45,14 @@ const UploadImage = ({ size, onChange }) => {
       </div>
     </button>
   );
+
   return (
     <>
       <Upload
-        action="https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload"
         listType="picture-card"
         fileList={fileList}
         onPreview={handlePreview}
-        onChange={handleChange}
+        onChange={handleCaps}
       >
         {fileList.length >= size ? null : uploadButton}
       </Upload>
@@ -65,4 +72,5 @@ const UploadImage = ({ size, onChange }) => {
     </>
   );
 };
+
 export default UploadImage;

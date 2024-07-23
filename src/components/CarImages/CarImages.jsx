@@ -1,6 +1,9 @@
 import { Divider, Form } from "antd";
 import UploadImage from "../Images/Images";
-const CarImages = () => {
+const CarImages = ({ form }) => {
+  const handleImageChange = (fileList) => {
+    form.setFieldsValue({ images: fileList });
+  };
   return (
     <div className="bg-white p-6">
       <div className="text-sm font-bold">Car Images (upto 5 images)</div>
@@ -8,14 +11,17 @@ const CarImages = () => {
       <div className="text-[0.6rem]">
         <div>
           <div className="font-bold ">
-            Images{" "}
-            <span className="text-red-500 required-asterisk"> *</span>
+            Images <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"images"} className="w-11/12">
-            <UploadImage size={10} />
+          <Form.Item
+            name={"images"}
+            className="w-11/12"
+            valuePropName="fileList"
+            getValueFromEvent={(e) => e && e.fileList}
+          >
+            <UploadImage size={10} onChange={handleImageChange} />
           </Form.Item>
         </div>
-       
       </div>
     </div>
   );

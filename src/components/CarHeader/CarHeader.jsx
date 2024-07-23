@@ -1,8 +1,9 @@
 import { FaEye, FaStar } from "react-icons/fa";
 import { IoCarSport } from "react-icons/io5";
 import { MdOutlineLocationOn, MdOutlineNoteAlt } from "react-icons/md";
+import {firstCaps} from "../../utils/Utility"
 
-const CarHeader = () => {
+const CarHeader = ({ car }) => {
   return (
     <div className="min-h-36 p-3 bg-white text-center">
       <div className="md:flex items-center justify-between md:mx-3 flex-wrap">
@@ -10,10 +11,10 @@ const CarHeader = () => {
           <div className="flex">
             <div className="flex text-xs items-center m-1">
               <IoCarSport />
-              <p className="px-2">Sedan</p>
+              <p className="px-2">{firstCaps(car.body)}</p>
             </div>
             <span className="bg-teal-700 max-h-4 text-xs text-white rounded m-1">
-              2023
+              {car.year}
             </span>
             <div className="flex text-xs text-orange-400 items-center m-1">
               <FaStar />
@@ -23,7 +24,7 @@ const CarHeader = () => {
               <FaStar />
             </div>
           </div>
-          <div className="text-3xl font-bold">Chevorlet Camaro</div>
+          <div className="text-3xl font-bold">{firstCaps(car.name)}</div>
           <div className="md:flex">
             <div className="text-xs flex items-center m-1">
               <MdOutlineLocationOn />

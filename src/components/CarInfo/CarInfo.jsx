@@ -1,5 +1,10 @@
 import { Divider, Form, Input, Select } from "antd";
 import { lazy } from "react";
+import {
+  firstCaps,
+  transformString,
+  extractNumbers,
+} from "../../utils/Utility";
  const body = [
    {
      value: "suv",
@@ -84,8 +89,27 @@ import { lazy } from "react";
    { value: "abs", label: "ABS" },
    { value: "ebs", label: "EBS" },
  ];
-const CarInfo = () => {
-   
+const CarInfo = ({ form }) => {
+  const handleCaps = (e) => {
+    const { id, value } = e.target;
+    const transformedValue = firstCaps(value);
+    form.setFieldsValue({ [id]: transformedValue });
+  };
+
+  const handleNumber = (e) => {
+    const { id, value } = e.target;
+    const transformedValue = extractNumbers(value);
+    form.setFieldsValue({ [id]: transformedValue });
+  };
+
+  const handleVin = (e) => {
+    const { id, value } = e.target;
+    console.log(id);
+    console.log(e.target);
+    const transformedValue = transformString(value);
+    form.setFieldsValue({ [id]: transformedValue });
+  };
+
   return (
     <div className="p-6">
       <div className="text-sm font-bold">Car Info</div>
@@ -95,10 +119,20 @@ const CarInfo = () => {
           <div className="font-bold ">
             Car Name <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"carName"} className="w-11/12">
+          <Form.Item
+            name={"carName"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please enter a car name",
+              },
+            ]}
+          >
             <Input
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
+              onChange={handleCaps}
             />
           </Form.Item>
         </div>
@@ -107,10 +141,20 @@ const CarInfo = () => {
             Brand Name{" "}
             <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"brandName"} className="w-11/12">
+          <Form.Item
+            name={"brandName"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please enter a brand name",
+              },
+            ]}
+          >
             <Input
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
+              onChange={handleCaps}
             />
           </Form.Item>
         </div>
@@ -118,8 +162,18 @@ const CarInfo = () => {
           <div className="font-bold ">
             Model <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"modelName"} className="w-11/12">
+          <Form.Item
+            name={"modelName"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please enter a model name",
+              },
+            ]}
+          >
             <Input
+              onChange={handleCaps}
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
             />
@@ -129,7 +183,16 @@ const CarInfo = () => {
           <div className="font-bold ">
             Body <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"body"} className="w-11/12">
+          <Form.Item
+            name={"body"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please selct a body type",
+              },
+            ]}
+          >
             <Select
               showSearch
               placeholder="Select a body"
@@ -148,10 +211,26 @@ const CarInfo = () => {
           <div className="font-bold ">
             VIN <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"vin"} className="w-11/12">
+          <Form.Item
+            name={"vin"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please enter a vechicle identity number",
+                pattern: /^[A-HJ-NPR-Z0-9]{17}$/,
+              },
+              {
+                pattern: /^.{17}$/,
+                message: "Input must be exactly 17 characters long!",
+              },
+            ]}
+          >
             <Input
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
+              onChange={handleVin}
+              maxLength={17}
             />
           </Form.Item>
         </div>
@@ -159,7 +238,16 @@ const CarInfo = () => {
           <div className="font-bold ">
             Year <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"year"} className="w-11/12">
+          <Form.Item
+            name={"year"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please selct an year",
+              },
+            ]}
+          >
             <Select
               options={year}
               filterOption={(input, option) =>
@@ -174,7 +262,16 @@ const CarInfo = () => {
           <div className="font-bold ">
             Seats <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"seats"} className="w-11/12">
+          <Form.Item
+            name={"seats"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please select a seats",
+              },
+            ]}
+          >
             <Select
               options={seats}
               filterOption={(input, option) =>
@@ -189,7 +286,16 @@ const CarInfo = () => {
           <div className="font-bold ">
             Gear Type <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"gearType"} className="w-11/12">
+          <Form.Item
+            name={"gearType"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please select a gear type",
+              },
+            ]}
+          >
             <Select
               options={transmission}
               filterOption={(input, option) =>
@@ -204,10 +310,21 @@ const CarInfo = () => {
           <div className="font-bold ">
             Mileage <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"mileage"} className="w-11/12">
+          <Form.Item
+            name={"mileage"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please enter a mileage",
+                pattern: /^[0-9]+$/,
+              },
+            ]}
+          >
             <Input
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
+              onChange={handleNumber}
             />
           </Form.Item>
         </div>
@@ -215,7 +332,16 @@ const CarInfo = () => {
           <div className="font-bold ">
             Fuel Type <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"fuelType"} className="w-11/12">
+          <Form.Item
+            name={"fuelType"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please select a fuel type",
+              },
+            ]}
+          >
             <Select
               options={fuelType}
               filterOption={(input, option) =>
@@ -231,7 +357,16 @@ const CarInfo = () => {
             Drivetrain{" "}
             <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"drivetrain"} className="w-11/12">
+          <Form.Item
+            name={"drivetrain"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please selct a drivetrain",
+              },
+            ]}
+          >
             <Select
               options={drivetrain}
               filterOption={(input, option) =>
@@ -247,7 +382,16 @@ const CarInfo = () => {
             Engine Power{" "}
             <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"enginePower"} className="w-11/12">
+          <Form.Item
+            name={"enginePower"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please enter a engine power",
+              },
+            ]}
+          >
             <Input
               className="bg-gray-50 p-1 hover:border-orange-400 focus:border-orange-400
           "
@@ -258,7 +402,16 @@ const CarInfo = () => {
           <div className="font-bold ">
             Brake <span className="text-red-500 required-asterisk"> *</span>
           </div>
-          <Form.Item name={"brake"} className="w-11/12">
+          <Form.Item
+            name={"brake"}
+            className="w-11/12"
+            rules={[
+              {
+                required: true,
+                message: "Please select a brake",
+              },
+            ]}
+          >
             <Select
               options={brake}
               filterOption={(input, option) =>

@@ -1,13 +1,11 @@
 import { FaRegHeart, FaWalking } from "react-icons/fa";
-import Carousel from "../Carousel/Carousel";
-import { Input } from "antd";
 import ReservationForm from "../ReservationForm/ReservationForm";
 import ImageCarousel from "../ImageCarousel/ImageCarousel";
 import OwnerCard from "../OwnerCard/OwnerCard";
 import ExtraService from "../ExtraService/ExtraService";
 import Description from "../Description/Description";
 
-const CarCard = () => {
+const CarCard = ({car}) => {
 
   return (
     <div className="flex justify-center gap-4 lg:gap-20 flex-wrap lg:mx-auto my-5">
@@ -28,7 +26,7 @@ const CarCard = () => {
             </div>
           </div>
           <div className="w-56 md:w-80 lg:w-full mx-auto">
-            <ImageCarousel />
+            <ImageCarousel images={car.images } />
           </div>
         </div>
         <ExtraService />

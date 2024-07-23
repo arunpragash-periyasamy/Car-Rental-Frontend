@@ -1,8 +1,12 @@
 import { Divider, Form, Input } from "antd";
+import { useEffect } from "react";
 import { FaCar } from "react-icons/fa";
 import { MdMyLocation } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
 
-const LocationAndTime = () => {
+const Location = () => {
+
+  
   return (
     <div className="bg-white md:min-w-[42rem] p-6 rounded">
        
@@ -49,4 +53,4 @@ const LocationAndTime = () => {
   );
 };
 
-export default LocationAndTime;
+export default Location;

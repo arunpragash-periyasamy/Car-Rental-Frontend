@@ -13,8 +13,19 @@ const BookingType = () => {
       <Divider />
       <div className="">
         <div>
-          <Form.Item name="book" className="mb-0">
-            <Radio.Group className="grid grid-cols-1 lg:grid-cols-4 gap-5">
+          <Form.Item
+            name="book"
+            className="mb-0"
+            rules={[
+              {
+                required: true,
+                message: "Select the booking type!",
+              },
+            ]}
+          >
+            <Radio.Group
+              className="grid grid-cols-1 lg:grid-cols-4 gap-5"
+            >
               <div>
                 <Radio
                   value="hourly"
@@ -53,29 +64,35 @@ const BookingType = () => {
 
         <div className="grid md:grid-cols-2 my-4">
           <div className="flex flex-col gap-1">
-            <p className="font-bold text-[0.6rem]">Start Date</p>
-            <Form.Item className="mb-0 mr-6">
-              <DatePicker className="w-full hover:border-orange-400 focus:border-orange-400" />
-            </Form.Item>
-          </div>
-          <div className="flex flex-col gap-1">
-            <p className="font-bold text-[0.6rem]">Start Time</p>
-            <Form.Item className="mb-0 mr-6">
-              <TimePicker className="w-full hover:border-orange-400 focus:border-orange-400" />
+            <p className="font-bold text-[0.6rem]">Pickup Date</p>
+            <Form.Item
+              className="mb-0 mr-6"
+              name="pickupDate"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select the pickup date",
+                },
+              ]}
+            >
+              <DatePicker showTime className="w-full hover:border-orange-400 focus:border-orange-400" />
             </Form.Item>
           </div>
         </div>
         <div className="grid md:grid-cols-2 my-4">
           <div className="flex flex-col gap-1">
             <p className="font-bold text-[0.6rem]">Return Date</p>
-            <Form.Item className="mb-0 mr-6" name="returnDate">
-              <DatePicker className="w-full hover:border-orange-400 focus:border-orange-400" />
-            </Form.Item>
-          </div>
-          <div className="flex flex-col gap-1">
-            <p className="font-bold text-[0.6rem]">Return Time</p>
-            <Form.Item className="mb-0 mr-6" name="returnTime">
-              <TimePicker className="w-full hover:border-orange-400 focus:border-orange-400" />
+            <Form.Item
+              className="mb-0 mr-6"
+              name="returnDate"
+              rules={[
+                {
+                  required: true,
+                  message: "Please select the return date",
+                },
+              ]}
+            >
+              <DatePicker showTime className="w-full hover:border-orange-400 focus:border-orange-400" />
             </Form.Item>
           </div>
         </div>

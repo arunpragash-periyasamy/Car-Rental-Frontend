@@ -1,9 +1,10 @@
 import React, { useRef, useState, useEffect } from "react";
+import {BACKEND_URL} from "../../utils/constants"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-const images = [
+const image = [
   "https://images.pexels.com/photos/170811/pexels-photo-170811.jpeg?auto=compress&cs=tinysrgb&w=600",
   "https://images.pexels.com/photos/919073/pexels-photo-919073.jpeg?auto=compress&cs=tinysrgb&w=600",
   "https://images.pexels.com/photos/112460/pexels-photo-112460.jpeg?auto=compress&cs=tinysrgb&w=600",
@@ -11,7 +12,7 @@ const images = [
   "https://images.pexels.com/photos/909907/pexels-photo-909907.jpeg?auto=compress&cs=tinysrgb&w=600",
 ];
 
-const ImageCarousel = () => {
+const ImageCarousel = ({ images=image }) => {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
 
@@ -52,19 +53,18 @@ const ImageCarousel = () => {
         {images.map((image, index) => (
           <div key={index}>
             <img
-              src={image}
+              src={`${BACKEND_URL}/api/cars/images/${image}`}
               alt={`Image ${index + 1}`}
               className="object-fill h-32 md:h-72 w-full rounded md:rounded-xl"
             />
           </div>
         ))}
       </Slider>
-
       <Slider {...settingsThumbs} className="relative">
         {images.map((image, index) => (
           <div key={index} className="px-2">
             <img
-              src={image}
+              src={`${BACKEND_URL}/api/cars/images/${image}`}
               alt={`Thumbnail ${index + 1}`}
               className="object-fill w-10 h-5 md:w-44 md:h-20 rounded md:rounded-xl cursor-pointer"
             />
