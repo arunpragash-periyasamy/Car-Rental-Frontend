@@ -18,7 +18,7 @@ const AddCarForm = () => {
       const response = await axiosInstance.get(`/cars/${id}`);
       setImageList(response.data.images);
       form.setFieldsValue(response.data)
-      console.log(response.data);
+      
     };
     useEffect(() => {
       if (id !== null || id != undefined) {
@@ -40,7 +40,7 @@ const fetchFileFromUrl = async (url) => {
 };
   const onFinish = async (values) => {
     values.id = 0;
-    console.log(values);
+    
     const formData = new FormData();
 
     // Append text fields to formData
@@ -75,7 +75,7 @@ const fetchFileFromUrl = async (url) => {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("Success:", response.data);
+       
         toast.success("Car added Successfully");
       } else {
         response = await axiosInstance.put(`/cars/${id}`, formData, {
@@ -83,7 +83,7 @@ const fetchFileFromUrl = async (url) => {
             "Content-Type": "multipart/form-data",
           },
         });
-        console.log("Success:", response.data);
+       
         toast.success("Car updated Successfully");
       }
       form.resetFields();

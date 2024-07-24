@@ -15,18 +15,15 @@ const ReservationForm = () => {
 
   const handleSameLocation = () => {
     if (!sameLocation) {
-      console.log(form.getFieldValue("sameLocation"));
       form.setFieldsValue({
         returnLocation: form.getFieldValue("deliveryLocation"),
       });
-      console.log("Value changed");
-    }
+      }
     setSameLocation(!sameLocation);
   };
 
   const onFinish = (values) => {
     if (validateAndAdjustTimes(form)) {
-      console.log(values);
       dispatch(setLocationForm(values));
       dispatch(setCarId(id));
       navigate("/checkout");

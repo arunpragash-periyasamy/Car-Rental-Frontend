@@ -10,12 +10,10 @@ const Register = () => {
   const dispatch = useDispatch();
   const onFinish = async (values) => {
     try {
-      console.log(values);
       const response = await axios.post(
         "http://localhost:8080/api/auth/register",
         values
       );
-        console.log(response.data);
         toast.success("User Registration Success")
       navigate("/login");
     } catch (err) {
@@ -23,8 +21,7 @@ const Register = () => {
         toast.error("User not found");
       } else if (err.response.status === 401 || err.response.status === 400) {
           toast.error(err.response.data);
-          console.log(err)
-      } else {
+     } else {
         toast.error("Error occured");
       }
     }

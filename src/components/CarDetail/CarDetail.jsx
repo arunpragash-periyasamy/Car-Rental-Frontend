@@ -14,14 +14,13 @@ const CarDetail = () => {
   const getCarDetail = async () => {
     const response = await axiosInstance(`cars/ ${id}`);
     setCar(response.data);
-    console.log(response.data);
+    
   };
 
   const getSubtotal = () => {
     let sum =
       car?.amount + car?.tax + car?.refundableDeposit + car?.convenienceFee + car?.tripProtectionFee + car?.doorDeliveryPrice;
-    console.log(car?.amount , car?.tax, car?.refundableDeposit, car?.convenienceFee);
-    return sum;
+   return sum;
   };
 
   useEffect(() => {

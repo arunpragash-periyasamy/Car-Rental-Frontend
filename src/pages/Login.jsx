@@ -10,9 +10,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const onFinish = async (values) => {
         try {
-            console.log(values);
             const response = await axios.post("http://localhost:8080/api/auth/login", values);
-            console.log(response.data);
             notify();
             dispatch(setUser(response.data))
             navigate("/");

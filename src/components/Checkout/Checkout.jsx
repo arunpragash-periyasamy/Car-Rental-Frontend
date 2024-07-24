@@ -16,7 +16,7 @@ const Checkout = () => {
   const formData = useSelector((state) => state.form.locationForm);
   
   const id = useSelector((state) => state.form.carId);
-  console.log(formData);
+  
   useEffect(() => {
     form.setFieldValue("deliveryLocation", formData.deliveryLocation);
     form.setFieldValue("returnLocation", formData.returnLocation);

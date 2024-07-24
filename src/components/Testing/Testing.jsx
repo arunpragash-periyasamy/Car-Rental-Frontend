@@ -14,8 +14,7 @@ const { Option } = Select;
 
 const AddCarForm = () => {
   const onFinish = (values) => {
-    console.log("Received values: ", values);
-  };
+    };
 
   return (
     <div className="p-8">

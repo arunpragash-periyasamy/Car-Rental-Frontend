@@ -8,7 +8,6 @@
 //   const [form] = Form.useForm();
 
 //   const onFinish = (values) => {
-//     console.log("Received values of form: ", values);
 //   };
 
 //   return (
@@ -90,8 +89,7 @@ const Filter = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
-    console.log("Received values of form: ", values);
-  };
+     };
 
     return (
         <div className="lg:w-3/4 mx-auto rounded-lg bg-white lg:top-[41rem] lg:left-36 lg:absolute">

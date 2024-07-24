@@ -15,11 +15,9 @@ const Home = () => {
     try {
       const response = await axiosInstance.get("/cars");
       setCars(response.data);
-      console.log(response.data);
-    }
+     }
     catch (err) {
-      console.log(err);
-      if (err.response.status === 403 || err.response.status === 401) {
+     if (err.response.status === 403 || err.response.status === 401) {
         toast.error("Need account login");
         navigate("/login");
       }

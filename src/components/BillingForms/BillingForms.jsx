@@ -17,12 +17,12 @@ const BillingForms = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const forms = useSelector(state => state.form);
-  console.log(dateToString(forms.locationForm.pickupDate));
+ 
   const onFinish = async (values) => {
     dispatch(setBillingForm(values));
     try {
       const data = { billingForm: values, locationForm: forms.locationForm, carId: forms.carId};
-      console.log(forms)
+      
       await axiosInstance.post("/bookings", data);
       toast("Your oder placed successfully");
       form.resetFields();
@@ -33,7 +33,7 @@ const BillingForms = () => {
         dispatch(clearUser());
         return;
       }
-      console.log(err);
+   
       message.error("Billing failed");
     }
   };

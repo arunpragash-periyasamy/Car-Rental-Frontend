@@ -13,9 +13,7 @@ export const firstCaps = (name) => {
 export const validateAndAdjustTimes = (form) => {
   const pickupDate = form.getFieldValue("pickupDate");
   const returnDate = form.getFieldValue("returnDate");
-  console.log("Raw pickup date:", pickupDate);
-  console.log("Raw return date:", returnDate);
-
+  
   if (
     returnDate.isAfter(pickupDate.add(1, "hour")) ||
     returnDate.isSame(pickupDate.add(1, "hour"))

@@ -4,19 +4,17 @@ import CarHeader from "../components/CarHeader/CarHeader";
 import Header from "../components/Header/Header"
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../utils/axios";
-import { useDispatch } from "react-redux";
 import { firstCaps } from "../utils/Utility";
 
 const CarDetailPage = () => {
   const { id } = useParams();
   const [car, setCar] = useState({});
-  const dispatch = useDispatch();
   const getCarDetail = async () =>
   {
     const response = await axiosInstance(`cars/${id}`);
     setCar(response.data)
     console.log(response.data);
-  }
+     }
 
   useEffect(() => {
     getCarDetail();

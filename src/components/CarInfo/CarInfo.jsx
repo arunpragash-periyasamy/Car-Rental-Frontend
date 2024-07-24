@@ -104,8 +104,7 @@ const CarInfo = ({ form }) => {
 
   const handleVin = (e) => {
     const { id, value } = e.target;
-    console.log(id);
-    console.log(e.target);
+   
     const transformedValue = transformString(value);
     form.setFieldsValue({ [id]: transformedValue });
   };
