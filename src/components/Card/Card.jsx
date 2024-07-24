@@ -20,7 +20,7 @@ const Card = ({car}) => {
             className="rounded w-72 h-44"
             src={
               car.images.length > 0
-                ? `${BACKEND_URL}/api/cars/images/${car.images[0]}`
+                ? `${car.images[0]}`
                 : CarImage
             }
             alt=""

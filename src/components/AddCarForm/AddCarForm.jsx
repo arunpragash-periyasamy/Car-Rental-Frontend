@@ -5,29 +5,42 @@ import CarImages from "../CarImages/CarImages";
 import { toast } from "react-toastify";
 import { axiosInstance } from "../../utils/axios";
 import AddPlace from "../AddPlace/AddPlace";
-import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const AddCarForm = () => {
   
   const [form] = Form.useForm();
+  const navigate = useNavigate();
+  const [imageList, setImageList] = useState([]);
     const { id } = useParams();
     const getCarData = async () => {
       const response = await axiosInstance.get(`/cars/${id}`);
-      console.log(response.data);
+      setImageList(response.data.images);
       form.setFieldsValue(response.data)
+      console.log(response.data);
     };
     useEffect(() => {
       if (id !== null || id != undefined) {
         getCarData();
       }
     }, []);
+const fetchFileFromUrl = async (url) => {
+  const response = await fetch(url);
+  const data = await response.blob();
+  let filename = url.split("/").pop();
 
+  // Ensure the filename has an extension
+  if (!filename.includes(".")) {
+    const fileExtension = data.type.split("/").pop();
+    filename = `image_${Date.now()}.${fileExtension}`;
+  }
+
+  return new File([data], filename, { type: data.type });
+};
   const onFinish = async (values) => {
     console.log(values);
-    const images = values.images.map((file) => file.originFileObj);
 
-    // Create a FormData object to include both text and file data
     const formData = new FormData();
 
     // Append text fields to formData
@@ -37,35 +50,41 @@ const AddCarForm = () => {
       }
     }
 
+    // Process images
+    const images = await Promise.all(
+      values.images.map(async (file) => {
+        if (file.originFileObj) {
+          return file.originFileObj;
+        } else if (file.url) {
+          return await fetchFileFromUrl(file.url);
+        }
+      })
+    );
+
     // Append image files to formData
-    images.forEach((image,) => {
-      formData.append(`images`, image);
+    images.forEach((image, index) => {
+      formData.append(`images`, image, image.name || `image_${index}`);
     });
 
     try {
-      if(id === null || id === undefined){
-      const response = await axiosInstance.post(
-        "/cars",
-        formData,
-        {
+      let response;
+      if (id === null || id === undefined) {
+        response = await axiosInstance.post("/cars", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
-        }
-      );
-      console.log("Success:", response.data);
-        toast.success("Car added Successfully")
-      }
-      else {
-        
-      const response = await axiosInstance.put(`/cars/${id}`, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
-      console.log("Success:", response.data);
-        toast.success("Car updated
-         Successfully");
+        });
+        console.log("Success:", response.data);
+        toast.success("Car added Successfully");
+      } else {
+        response = await axiosInstance.put(`/cars/${id}`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
+        console.log("Success:", response.data);
+        toast.success("Car updated Successfully");
+        navigate("/view-cars");
       }
       form.resetFields();
     } catch (error) {
@@ -78,13 +97,13 @@ const AddCarForm = () => {
       <div className="pb-4 rounded">
         <Form onFinish={onFinish} form={form}>
           <div className="bg-white rounded-lg">
-            <Form.Item name={"id"}>
+            <Form.Item name={"id"} className="hidden">
               <input type="text" value={id} />
             </Form.Item>
             <CarInfo form={form} />
             <PriceInfo form={form} />
             <AddPlace form={form} />
-            <CarImages form={form} />
+            <CarImages form={form} images={imageList} />
           </div>
           <div className="flex justify-end my-4 gap-2">
             <button

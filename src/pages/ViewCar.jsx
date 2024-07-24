@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { axiosInstance } from "../utils/axios";
-import CarCard from "../components/CarCard/CarCard";
 import Listing from "../components/Listing/Listing";
 
 const ViewCar = () => {
@@ -21,7 +20,7 @@ const ViewCar = () => {
         </div>
         <div className="mx-10 my-5 rounded ">
                 {
-                    cars.map(car => <Listing car={car} />)
+                    cars.map(car => <Listing key={car.id} car={car} />)
          }
         </div>
       </div>
