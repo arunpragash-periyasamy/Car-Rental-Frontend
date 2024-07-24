@@ -53,7 +53,7 @@ const ImageCarousel = ({ images=image }) => {
         {images.map((image, index) => (
           <div key={index}>
             <img
-              src={`${BACKEND_URL}/api/cars/images/${image}`}
+              src={`${image}`}
               alt={`Image ${index + 1}`}
               className="object-fill h-32 md:h-72 w-full rounded md:rounded-xl"
             />
@@ -64,7 +64,7 @@ const ImageCarousel = ({ images=image }) => {
         {images.map((image, index) => (
           <div key={index} className="px-2">
             <img
-              src={`${BACKEND_URL}/api/cars/images/${image}`}
+              src={`${image}`}
               alt={`Thumbnail ${index + 1}`}
               className="object-fill w-10 h-5 md:w-44 md:h-20 rounded md:rounded-xl cursor-pointer"
             />

@@ -39,8 +39,8 @@ const fetchFileFromUrl = async (url) => {
   return new File([data], filename, { type: data.type });
 };
   const onFinish = async (values) => {
+    values.id = 0;
     console.log(values);
-
     const formData = new FormData();
 
     // Append text fields to formData
@@ -69,6 +69,7 @@ const fetchFileFromUrl = async (url) => {
     try {
       let response;
       if (id === null || id === undefined) {
+        formData.set(id, 0);
         response = await axiosInstance.post("/cars", formData, {
           headers: {
             "Content-Type": "multipart/form-data",
@@ -84,9 +85,9 @@ const fetchFileFromUrl = async (url) => {
         });
         console.log("Success:", response.data);
         toast.success("Car updated Successfully");
-        navigate("/view-cars");
       }
       form.resetFields();
+      navigate("/view-cars");
     } catch (error) {
       console.error("Error:", error);
       toast.error("Error in adding car");

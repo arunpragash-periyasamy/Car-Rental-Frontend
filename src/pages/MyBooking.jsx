@@ -1,6 +1,10 @@
+import Header from "../components/Header/Header";
+
 const MyBooking = () => {
     return (
-        <div>My Bookings</div>
+        <div>
+            <Header />
+        </div>
     )
 }
 

@@ -48,7 +48,7 @@ const Header = () => {
           )}
           {userType === "user" && (<>
           <div>
-            <Link to="/my-bookings">My Bookings</Link>
+            <Link to="/my-booking">My Bookings</Link>
           </div>
           </>
           )}
