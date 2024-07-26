@@ -11,7 +11,7 @@ const Register = () => {
   const onFinish = async (values) => {
     try {
       const response = await axios.post(
-        "http://54.152.178.167:80/backend/api/auth/register",
+        "http://54.210.143.150:80/backend/api/auth/register",
         values
       );
         toast.success("User Registration Success")
