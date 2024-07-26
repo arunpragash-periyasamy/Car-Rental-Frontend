@@ -1,14 +1,15 @@
 import axios from "axios";
 import {store} from './store/store'
+import { BACKEND_URL } from "./constants";
 
 // Axios instance for login and registration
 export const axiosAuth = axios.create({
-  baseURL: "http://34.201.168.63:80/backend/api/auth",
+  baseURL: `${BACKEND_URL}/api/auth`,
 });
 
 // Axios instance for authenticated API access
 export const axiosInstance = axios.create({
-  baseURL: "http://34.201.168.63:80/backend/api",
+  baseURL: `${BACKEND_URL}/api`,
 });
 
 // Interceptor to add token to requests

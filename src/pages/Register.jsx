@@ -2,16 +2,15 @@ import { Form, Input, Radio } from "antd";
 import Logo from "../../public/logo.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import axios from "axios";
 import { useDispatch } from "react-redux";
-import { setUser } from "../utils/slices/userSlice";
+import { axiosAuth } from "../utils/axios";
 const Register = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const onFinish = async (values) => {
     try {
-      const response = await axios.post(
-        "http://34.201.168.63:80/backend/api/auth/register",
+      const response = await axiosAuth.post(
+        "/register",
         values
       );
         toast.success("User Registration Success")

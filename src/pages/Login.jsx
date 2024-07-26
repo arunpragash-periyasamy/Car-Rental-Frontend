@@ -5,12 +5,13 @@ import {  toast } from "react-toastify";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { setUser } from "../utils/slices/userSlice";
+import { axiosAuth } from "../utils/axios";
 const Login = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const onFinish = async (values) => {
         try {
-            const response = await axios.post("http://34.201.168.63:80/backend/api/auth/login", values);
+            const response = await axiosAuth.post("/login", values);
             notify();
             dispatch(setUser(response.data))
             navigate("/");
