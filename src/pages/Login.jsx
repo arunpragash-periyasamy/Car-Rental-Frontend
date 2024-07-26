@@ -10,7 +10,7 @@ const Login = () => {
     const dispatch = useDispatch();
     const onFinish = async (values) => {
         try {
-            const response = await axios.post("http://54.152.178.167:8080/api/auth/login", values);
+            const response = await axios.post("http://54.152.178.167:80/api/auth/login", values);
             notify();
             dispatch(setUser(response.data))
             navigate("/");
