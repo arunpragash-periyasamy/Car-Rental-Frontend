@@ -26,3 +26,14 @@ axiosInstance.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+
+// Function to set common headers including CORS headers
+const setCommonHeaders = (axiosInstance) => {
+  axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; // This line won't solve CORS issue by itself
+  axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
+};
+
+// Apply headers to both instances
+setCommonHeaders(axiosAuth);
+setCommonHeaders(axiosInstance);
