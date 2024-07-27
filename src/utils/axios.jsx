@@ -33,6 +33,3 @@ axiosInstance.interceptors.request.use(
 
 
 
-// Apply headers to both instances
-setCommonHeaders(axiosAuth);
-setCommonHeaders(axiosInstance);
