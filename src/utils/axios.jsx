@@ -10,6 +10,10 @@ export const axiosAuth = axios.create({
 // Axios instance for authenticated API access
 export const axiosInstance = axios.create({
   baseURL: `${BACKEND_URL}/api`,
+  headers: {
+    'Accept': '*/*',  // Accept all types of content
+    'Content-Type': 'application/json'
+  }
 });
 
 // Interceptor to add token to requests
@@ -28,11 +32,6 @@ axiosInstance.interceptors.request.use(
 );
 
 
-// Function to set common headers including CORS headers
-const setCommonHeaders = (axiosInstance) => {
-  axiosInstance.defaults.headers.common['Access-Control-Allow-Origin'] = '*'; // This line won't solve CORS issue by itself
-  axiosInstance.defaults.headers.common['Content-Type'] = 'application/json';
-};
 
 // Apply headers to both instances
 setCommonHeaders(axiosAuth);
