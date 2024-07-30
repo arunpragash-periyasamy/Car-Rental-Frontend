@@ -5,8 +5,10 @@ import {Outlet, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { axiosInstance } from './utils/axios';
 import { clearUser } from './utils/slices/userSlice';
+import { BACKEND_URL } from './utils/constants';
 
 function App() {
+  fetch(BACKEND_URL);
   const token = useSelector(store => store.user.token);
   const navigate = useNavigate();
   const dispatch = useDispatch();

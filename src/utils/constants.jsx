@@ -1,1 +1,1 @@
-export const BACKEND_URL = "http://52.90.69.52";
+export const BACKEND_URL = "https://testing-tagname.onrender.com";

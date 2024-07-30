@@ -38,7 +38,7 @@ const CarDetail = () => {
         <img
           src={
             car?.images?.length > 0
-              ? ` ${BACKEND_URL}/api/cars/images/ ${car.images[0]}`
+              ? `${BACKEND_URL+car.images[0]}`
               : Image
           }
           alt="Car Image"
