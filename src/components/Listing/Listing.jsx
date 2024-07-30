@@ -6,12 +6,13 @@ import { MdOutlineSevereCold } from "react-icons/md";
 import { PiSeatBold } from "react-icons/pi";
 import { Link } from "react-router-dom";
 import { firstCaps } from "../../utils/Utility";
+import { BACKEND_URL } from "../../utils/constants";
 
 const Listing = ({ car }) => (
   <Link to={`/add-car/${car.id}`}>
     <div className="w-11/12 bg-white p-3 m-6 rounded flex items-center justify-between space-x-4 cursor-pointer hover:shadow-orange-300 hover:shadow-lg">
       <div>
-        <img className="w-48 rounded" src={car?.images[0]} alt="" />
+        <img className="w-48 rounded" src={BACKEND_URL+car?.images[0]} alt="" />
       </div>
       <div>
         <h1 className="font-bold text-3xl">{car.carName}</h1>

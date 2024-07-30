@@ -51,18 +51,18 @@ const router = createBrowserRouter([
         element: <ProtectedRoute element={AddCar} />,
       },
       {
-        path: "/login",
-        element: <Login />,
-      },
-      {
         path: "/my-booking",
         element: <MyBooking />,
       },
-      {
-        path: "/register",
-        element: <Register />,
-      },
     ],
+  },
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
 ]);
 

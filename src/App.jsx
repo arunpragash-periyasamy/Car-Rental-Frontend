@@ -1,13 +1,14 @@
 
 import { useEffect } from 'react'
 import './App.css'
-import {Outlet} from 'react-router-dom'
+import {Outlet, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { axiosInstance } from './utils/axios';
 import { clearUser } from './utils/slices/userSlice';
 
 function App() {
   const token = useSelector(store => store.user.token);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const validateToken = async () => {
     try {
@@ -20,6 +21,7 @@ function App() {
     }
     catch (err) {
       dispatch(clearUser());
+      navigate("/login")
     }
   }
   useEffect(() => { 

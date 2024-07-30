@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Header from "../components/Header/Header";
 import { axiosInstance } from "../utils/axios";
+import { BACKEND_URL } from "../utils/constants";
 
 const MyBooking = () => {
     const [bookings, setBookings] = useState([]);
@@ -18,11 +19,11 @@ const MyBooking = () => {
           <h1>View Car</h1>
         </div>
         <div className="mx-10 my-5 rounded space-y-4">
-          {bookings.map((booking) => (
-            <div className="bg-white flex items-center justify-between p-3 rounded hover:shadow-md hover:shadow-orange-300">
+          {bookings.map((booking, index) => (
+            <div key={index} className="bg-white flex items-center justify-between p-3 rounded hover:shadow-md hover:shadow-orange-300">
               <div>
                 <img
-                  src={booking.carImage}
+                  src={BACKEND_URL+booking.carImage}
                   alt=""
                   className="w-40 h-30 rounded-md"
                 />
